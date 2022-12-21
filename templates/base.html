@@ -1,0 +1,34 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=decice-width,intial-scale=1.0">
+        <link rel="stylesheet" href= "{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{%static 'css/style.css'%}">
+        <link rel="stylesheet" href="{%static 'css/pretty-checkbox.min.css'%}">
+    <title>my road-map | {%block title%} {%endblock%} </title>
+    </head>
+    <body>
+        {%include 'part/navbar.html'%}
+        {%block content%}
+        {%endblock%}
+        {%include 'part/footer.html'%}
+        <script src="{%static 'js/jquery-3.4.1.slim.min.js'%}"></script>
+        <script src="{%static 'js/popper.min.js'%}"></script>
+        <script src="{%static 'js/bootstrap.min.js'%}"></script>
+        <script>
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
+            $(".year").text( (new Date).getFullYear() );
+            $(document).ready(function(){
+                  $("#staticBackdrop").on('shown.bs.modal',
+                  function(){
+                      $(this).find('#inputqty').focus();
+                      $(this).find('#inputqty').select();
+                      ;})  
+            });
+        </script>
+    </body>
+</html>

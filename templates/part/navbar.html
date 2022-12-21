@@ -1,0 +1,97 @@
+{%load static%}
+    
+  <!--navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+      <a class="navbar-brand" href="#">
+          <img src="{%static 'img/logo.jpg'%}" class="img-brand" alt="My Coffee">
+          Road-Map
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            
+              
+              <li
+              {% if '/' == request.path%}
+              class="nav-item active" 
+              {%else%}
+              class="nav-item"
+              {%endif%}
+               >
+                <a class="nav-link" href="{%url 'home'%}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li
+            {% if 'login ' in request.path or  'signup ' in request.path or   'mycv' in request.path or 'profile ' in request.path or 'accounts' in request.path %}
+              class="nav-item dropdown active" 
+              {%else%}
+              class="nav-item dropdown"
+              {%endif%}
+             
+             
+             
+             >
+              {% if request.user.is_authenticated %}
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Profile
+              </a>
+              {%else%}
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Join us
+              </a>
+              {%endif%}
+              <div class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdown">
+                {% if request.user.is_authenticated %}
+                <a class="dropdown-item" href="{%url 'mycv'%}">My CV</a>
+                <a class="dropdown-item" href="{%url 'profile'%}">My profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{%url 'logout'%}">LogOut</a>
+                {%else%}
+              <a class="dropdown-item" href="{%url 'login'%}">Sign in</a>
+              <a class="dropdown-item" href="{%url 'signup'%}">Sign up</a>
+              {%endif%}
+              
+            </li>
+            <li  id="coffee-nav-item">
+             <a  class="nav-link" href="#courses">courses</a>
+            </li>
+            
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              tracks
+              </a>
+              <div class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">web development</a>
+              <a class="dropdown-item" href="#">mobile development</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">machine learning</a>
+              <a class="dropdown-item" href="#">computer vision</a>
+              <a class="dropdown-item" href="#">Data Science</a>
+              <a class="dropdown-item" href="#">NLP</a>
+
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">All Tracks</a>
+              </div>
+            </li> -->
+
+            
+
+          </ul>
+          {%if request.user.is_authenticated%}
+          <h5 style="color: aliceblue; margin-right :15px;">welcome, {{request.user.username}}</h5>
+        {%endif%}
+          <form method="GET" action="search" class="form-inline my-2 my-lg-0">
+            <input name="search" class="form-control mr-sm-2 remove-outline" type="search" placeholder="Search" aria-label="Search">
+          <div class="btn-group" role="group">
+            <button name="submit" class="btn btn-warning my-2 my-sm-0" type="submit">Search</button>
+            
+          </div>
+          
+          </form>
+      </div>
+  </nav>
+

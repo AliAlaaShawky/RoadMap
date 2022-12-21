@@ -1,0 +1,47 @@
+
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+    <div class="my-form container p-5 my-5 rounded border border-primary">
+        {%if request.user.is_authenticated%}
+      <form>
+            <h2 class="text-center">Course Details</h2>
+            <hr>
+
+            <section>
+                
+                  <div class="row p-5 " >
+
+                    <div class="card mb-3 w-100" >
+                      <div class="row no-gutters">
+                        <div class="col-md-4">
+                          <img src="{{coursedetails.cImg.url}}" class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title" id="productName">{{coursedetails.CName}}</h5>
+                            <hr>                           
+                            <h5 class="card-text" id="description">{{coursedetails.cDescription}}</h5>                            <hr>
+                            <!-- start_id=coursedetails.id -->
+                            <a href="{%url 'cv' course_name=coursedetails.CName start=coursedetails.id%}" type="submit" class="btn btn-primary">Add To CV</a> 
+                            <a href="{%url 'begin' start_name=coursedetails.CName start_id=coursedetails.id%}" type="submit" class="btn btn-success">Start</a>  
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  {%include 'part/alert.html'%}
+            </section>
+        
+
+        </form>
+
+    </div>
+    {%else%}
+    <h4 class="alert alert-danger">you must login First <a class="text-dark" href="{%url 'login'%}">login</a>
+      </h4>
+      {%endif%}
+        </div>
+{%endblock%}

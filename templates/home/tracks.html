@@ -1,0 +1,55 @@
+{%extends 'base.html'%}
+{%block content%}
+{%load static%}
+
+    <div class=" my-form container p-5 my-5 rounded border border-primary">
+      {% if request.user.is_authenticated %}
+      <form>
+            <h2 class="text-center"> {{var}} course</h2>
+            <hr>
+            <section >
+                <div class="container-fluid">
+                  <div class="row p-5" >
+                    {%if content %}
+                    <div>
+                      <div class="card m-2" style="width: 18rem;">
+                        <img src="{{content.TrackImg.url}}" class="card-img-top" height="220px" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">{{content.TrackName}}</h5>
+                          <h5 class="card-title">course content</h5>
+                          <a href="{%url 'traCk' pro_name=content.TrackName %}" class="btn btn-warning">Show Details</a>
+
+                        </div>
+                      </div>
+                    </div>
+                    {%else%}
+                    {%for content in trackcontent%}
+                    <div>
+                      <div class="card m-2" style="width: 18rem;">
+                        <img src="{{content.Tmg.url}}" class="card-img-top" height="220px" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">{{content.TName}}</h5>
+                          <h5 class="card-title">{{content.TDescription}}</h5>
+                          <a href="{%url 'mytrack' track_name=var.TrackName track_id=content.id%}" class="btn btn-warning">Show Details</a>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {%empty%}
+                    
+                      <h5 class="alert alert-primary">no details here  </h5>
+                      {%endfor%}
+                      {%endif%}
+                  </div>
+                </div>
+            </section>
+        
+
+        </form>
+{%else%}
+<h4 class="alert alert-danger">you must login First <a class="text-dark" href="{%url 'login'%}">login</a>
+  </h4>
+  {%endif%}
+    </div>
+
+{%endblock%}

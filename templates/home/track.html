@@ -1,0 +1,48 @@
+
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+    <div class="my-form container p-5 my-5 rounded border border-warning">
+        {%if request.user.is_authenticated%}
+      <form>
+            <h2 class="text-center">Track Details</h2>
+            <hr>
+
+            <section>
+                
+                  <div class="row p-5 " >
+
+                    <div class="card mb-3 w-100" >
+                      <div class="row no-gutters">
+                        <div class="col-md-4">
+                          <img src="{{trackdetails.Tmg.url}}" class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title" id="productName">{{trackdetails.TName}}</h5>
+                            <hr>
+                            <p class="card-text" id="description">{{trackdetails.TDescription}}</p>
+                            <hr>
+                            <a href="{%url 'trackcv' course_name=trackdetails.TName start=trackdetails.id%}" type="submit" class="btn btn-primary">Add To CV</a> 
+                            <a href="{%url 'trackbegin' begin_id=trackdetails.id begin_name=trackdetails.TName %}" type="submit" class="btn btn-success">Start</a>                           
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  {%include 'part/alert.html'%}
+
+            </section>
+        
+
+        </form>
+
+    </div>
+    {%else%}
+    <h4 class="alert alert-danger">you must login First <a class="text-dark" href="{%url 'login'%}">login</a>
+      </h4>
+      {%endif%}
+        </div>
+{%endblock%}

@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{%block content%}
+{%load static%}
+
+    <div class=" my-form container p-5 my-5 rounded border border-primary">
+{% if request.user.is_authenticated %}
+      <form>
+            <h2 class="text-center"> {{var}} course</h2>
+            <hr>
+            <section >
+                <div class="container-fluid">
+                  <div class="row p-5" >
+                    {%if content%}
+                    <div>
+                      <div class="card m-2" style="width: 18rem;">
+                        <img src="{{content.courseImg.url}}" class="card-img-top" height="220px" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">{{content.CourseName}}</h5>
+                          <p class="card-text">Course content.</p>
+                          <a href="{%url 'course'  pro_id=content.id%}" class="btn btn-warning">Show Details</a>
+                        </div>
+                      </div>
+                    </div>
+                    {%else%}
+                    {%for content in coursecontent%}
+                    <div>
+                      <div class="card m-2" style="width: 18rem;">
+                        <img src="{{content.cImg.url}}" class="card-img-top" height="220px" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">{{content.CName}}</h5>
+                          <p class="card-text">Course content.</p>
+                          <a href="{%url 'mycourse' course_name=var.CourseName course_id=content.id%}" class="btn btn-warning">Show Details</a>
+                        </div>
+                      </div>
+                    </div>
+                      {%endfor%}
+                    {%endif%}
+                  </div>
+                </div>
+            </section>
+        
+
+        </form>
+{%else%}
+        <h4 class="alert alert-danger">you must login First <a class="text-dark" href="{%url 'login'%}">login</a>
+        </h4>
+        {%endif%}
+    </div>
+
+{%endblock%}
